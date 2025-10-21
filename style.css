@@ -21,8 +21,8 @@ body{
   margin-top: 30px;
   border-radius: 12px;
   display: flex;
-  flex-direction: column;    /* 👈 Esto apila el título arriba */
-  align-items: center;       /* 👈 Centra el contenido horizontalmente */
+  flex-direction: column;    
+  align-items: center;       
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -34,7 +34,7 @@ h1 {
     text-align: center;
     font-family: "Libre Caslon Text", serif;
      display: flex;
-  flex-direction: column;    /* 👈 Esto apila el título arriba */
+  flex-direction: column;    
   align-items: center; 
 }
 
@@ -121,4 +121,32 @@ button {
 
 button:hover {
     background-color: #d63031;
+}
+.calendar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ee26e4;
+    border-radius: 10px;
+    box-shadow: #357ab700;
+    width: 200px;
+    padding: 10px;
+    font-family: "Libre Caslon Text", serif;
+}
+
+.calendar-header {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.calendar-grid div {
+    padding: 4px 0;
+    border-radius: 5px;
+}
+
+.calendar-grid .today {
+    background-color: blanchedalmond;
+    color: white;
+    font-weight: bold;
 }
