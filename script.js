@@ -1,6 +1,33 @@
 const taskInput = document.getElementById('taskInput');
 const addTaskBtn = document.getElementById('addTaskBtn');
 const taskList = document.getElementById('taskList');
+const monthname = document.getElementById('month-name');
+const year = document.getElementById('year');
+const grid = document.getElementById('calendar-grid');
+
+const date= new Date();
+const currentMonth = date.getMonth();
+const currentYear = date.getFullYear();
+const today = date.getDate();
+//months names
+const months = [
+  "January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"
+];
+
+monthname.textContent = months[currentMonth];
+year.textContent = currentYear;
+
+//first day of the month
+const firstDay= new Date (currentYear, currentMonth, 1).getDay();
+//How many days 
+const daysInMonth = new Date(currentYear, currentMonth +1, 0).getDate();
+
+for (let i = 1; i <= daysInMonth; i++) {
+  const dayCell = document.createElement('div');
+  dayCell.textContent = i;
+  if (i === today) dayCell.classList.add('today');
+  grid.appendChild(dayCell)
+}
 
 document.addEventListener('DOMcontentLoaded', loadTasks);
 addTaskBtn.addEventListener('click', addTask);

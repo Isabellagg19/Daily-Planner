@@ -32,6 +32,7 @@ body{
 
 h1 {
     text-align: center;
+     font-size: 3.5rem;  
     font-family: "Libre Caslon Text", serif;
      display: flex;
   flex-direction: column;    
@@ -84,7 +85,14 @@ h1 {
 }
 
 h2 {
+    text-align:center;
+     font-size: 2rem;
+    font-family: "Libre Caslon Text", serif;
+}
+
+h3 {
     text-align: center;
+    font-size: 2rem;
     font-family: "Libre Caslon Text", serif;
 }
 
@@ -103,13 +111,15 @@ h2 {
 }
 
 #timer {
-    font-size: 3rem;
+    font-size: 4rem;
     margin-bottom: 15px;
+    text-align: center;
     font-family: "Libre Caslon Text", serif;
 }
 
 button { 
-    background-color: #ff7675;
+    background-color: #f790cf;
+    text-align: justify;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -122,31 +132,59 @@ button {
 button:hover {
     background-color: #d63031;
 }
+
 .calendar {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: #ee26e4;
-    border-radius: 10px;
-    box-shadow: #357ab700;
-    width: 200px;
-    padding: 10px;
-    font-family: "Libre Caslon Text", serif;
+  position: absolute;
+  top: 40px;        
+  right: 60px;    
+  background-color: #fff1f7;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+  width: 220px;
+  padding: 15px;
+  font-family: "Libre Caslon Text", serif;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.calendar:hover {
+  transform: scale(1.03);
 }
 
 .calendar-header {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 8px;
+  font-weight: 600;
+  color: #ff4fa1;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  font-size: 12px;
+  justify-items: center;
 }
 
 .calendar-grid div {
-    padding: 4px 0;
-    border-radius: 5px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: #333;
+  background-color: #ffe6f0;
+}
+
+.calendar-grid div:hover {
+  background-color: #ffb6c1;
+  color: white;
+  cursor: pointer;
 }
 
 .calendar-grid .today {
-    background-color: blanchedalmond;
-    color: white;
-    font-weight: bold;
+  background-color: #ff69b4;
+  color: white;
+  font-weight: bold;
+  border: 1px solid #ff85c1;
 }
