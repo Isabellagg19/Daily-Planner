@@ -17,19 +17,26 @@
            <div class="calendar-grid" id="calendar-grid"></div>
          </div>
         <div class="planner-container">
+            <h2> Today's Goals</h2>
             <div class="task-input">
-                <h2>Today’s Goals</h2>
-                <input type="text" id="taskInput" placeholder="Add a new task">
+                <input type="text" id="taskInput" placeholder="✨You got it✨">
                 <button id="addTaskBtn">Add task</button>
             </div>
             <ul id="taskList"></ul>
         </div>
         <div id="Timer-container">
-            <h3> Stay Focus Timer</h3>
-            <div id="timer">25:00</div>   
+            <h3>✨Make It Happen Timer✨</h3>
+            <div id="timer">25:00</div>  
+             <div class="timer-buttons">
             <button id="start-btn">Start</button>
             <button id="pause-btn">Pause</button>
-            <button id="reset-btn">Reset</button>
+            <button id="reset-btn">Reset</button> 
+            </div>
+        </div>
+        <div class= "journal-container">
+            <h4>Daily Journal</h4>
+            <textarea id="journal" placeholder="Write your thoughts, goals, or wins here"></textarea>
+            <button id="SaveJournal">Save Entry</button>
         </div>
 
         <script src="script.js"></script>

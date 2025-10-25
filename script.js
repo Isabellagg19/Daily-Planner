@@ -4,15 +4,19 @@ const taskList = document.getElementById('taskList');
 const monthname = document.getElementById('month-name');
 const year = document.getElementById('year');
 const grid = document.getElementById('calendar-grid');
+const alarmSound = new Audio("sound.mp3");
+const journal = document.getElementById("journal");
+const saveJournal = document.getElementById("saveJournal");
 
 const date= new Date();
 const currentMonth = date.getMonth();
 const currentYear = date.getFullYear();
 const today = date.getDate();
+
 //months names
 const months = [
-  "January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December"
-];
+  "0", "January", "February", "March", "April", "June", 
+  "July", "August", "September", "October", "November", "December"];
 
 monthname.textContent = months[currentMonth];
 year.textContent = currentYear;
@@ -20,7 +24,12 @@ year.textContent = currentYear;
 //first day of the month
 const firstDay= new Date (currentYear, currentMonth, 1).getDay();
 //How many days 
-const daysInMonth = new Date(currentYear, currentMonth +1, 0).getDate();
+const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+for (let i = 0; i < firstDay; i++) {
+  const emptyCell = document.createElement('div');
+  grid.appendChild(emptyCell);
+}
 
 for (let i = 1; i <= daysInMonth; i++) {
   const dayCell = document.createElement('div');
@@ -104,11 +113,13 @@ function startTimer() {
       clearInterval(timerInterval);
       isRunning = false;
       if (!onBreak) {
+        alarmSound.play();
         alert('Break timeee');
         onBreak = true;
         time = breakTime;
         startTimer(); // Break starts
       } else {
+         alarmSound.play();
         alert('time to get back to work');
         onBreak = false;
         time = focusTime;
@@ -136,3 +147,10 @@ pauseBtn.addEventListener('click', pauseTimer);
 resetBtn.addEventListener('click', resetTimer);
 
 updateDisplay();
+
+journal.value = localStorage.getItem("journalText") || "";
+
+saveJournal.addEventListener("click", () => {
+  localStorage.setItem("journalText", journal.value);
+  alert(" Your entry has been saved!");
+});
