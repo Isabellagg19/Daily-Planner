@@ -7,6 +7,7 @@ const grid = document.getElementById('calendar-grid');
 const alarmSound = new Audio("sound.mp3");
 const journal = document.getElementById("journal");
 const saveJournal = document.getElementById("saveJournal");
+const entriesContainer = document.getElementById ("entriesContainer");
 
 const date= new Date();
 const currentMonth = date.getMonth();
@@ -153,4 +154,56 @@ journal.value = localStorage.getItem("journalText") || "";
 saveJournal.addEventListener("click", () => {
   localStorage.setItem("journalText", journal.value);
   alert(" Your entry has been saved!");
+});
+
+function displayEntries() {
+  entriesContainer.innerHTML = "";
+  entries.forEach(entry => {
+    const entryDiv = document.createElement("div");
+    entryDiv.classList.add("entry");
+    entryDiv.innerHTML = `
+      <div class="entry-date">${entry.date}</div>
+      <div class="entry-text">${entry.text}</div>
+    `;
+    entriesContainer.appendChild(entryDiv);
+  });
+}
+
+let entries = JSON.parse(localStorage.getItem("journalEntries")) || [];
+function displayEntries() {
+  entriesContainer.innerHTML = "";
+  entries.forEach(entry => {
+    const entryDiv = document.createElement("div");
+    entryDiv.classList.add("entry");
+    entryDiv.innerHTML = `
+      <div class="entry-date">${entry.date}</div>
+      <div class="entry-text">${entry.text}</div>
+    `;
+    entriesContainer.appendChild(entryDiv);
+  });
+}
+
+displayEntries();
+
+saveJournal.addEventListener("click", () => {
+  const text = journal.value.trim();
+  if (text === "") {
+    alert("Please write something before saving 💕");
+    return;
+  }
+
+  const date = new Date().toLocaleString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
+  const newEntry = { text, date };
+  entries.unshift(newEntry); 
+
+  localStorage.setItem("journalEntries", JSON.stringify(entries));
+  journal.value = "";
+  displayEntries();
 });
