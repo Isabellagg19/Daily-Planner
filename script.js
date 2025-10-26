@@ -6,6 +6,45 @@ const year = document.getElementById('year');
 const grid = document.getElementById('calendar-grid');
 const alarmSound = new Audio("sound.mp3");
 
+document.addEventListener("DOMContentLoaded", () => {
+  const greetingElement = document.getElementById("greeting");
+  const nameInput = document.getElementById("nameInput");
+  const saveNameBtn = document.getElementById("saveNameBtn");
+
+  const savedName = localStorage.getItem("userName");
+
+  if (savedName) {
+    showGreeting(savedName);
+    nameInput.style.display = "none";
+    saveNameBtn.style.display = "none";
+  }
+
+  saveNameBtn.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    if (name !== "") {
+      localStorage.setItem("userName", name);
+      showGreeting(name);
+      nameInput.style.display = "none";
+      saveNameBtn.style.display = "none";
+    }
+  });
+
+  function showGreeting(name) {
+    const hour = new Date().getHours();
+    let greeting;
+
+    if (hour < 12) {
+      greeting = "Good morning";
+    } else if (hour < 18) {
+      greeting = "Good afternoon";
+    } else {
+      greeting = "Good evening";
+    }
+
+    greetingElement.textContent = `${greeting}, ${name}!`;
+  }
+});
+
 const date= new Date();
 const currentMonth = date.getMonth();
 const currentYear = date.getFullYear();
@@ -116,7 +155,7 @@ function startTimer() {
         alert('Break timeee');
         onBreak = true;
         time = breakTime;
-        startTimer();
+        startTimer(); // Break starts
       } else {
         alert('time to get back to work');
         onBreak = false;
@@ -208,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const newEntry = { text, date };
-    entries.unshift(newEntry); // The most recent one goes in the top
+    entries.unshift(newEntry); 
 
     try {
       localStorage.setItem("journalEntries", JSON.stringify(entries));

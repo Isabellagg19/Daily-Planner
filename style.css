@@ -279,3 +279,38 @@ button:hover {
   font-size: 14px;
   color: #333;
 }
+
+#greeting-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#greeting {
+  font-size: 26px;
+  color: #ff7bb8;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 10px;
+}
+
+#nameInput {
+  padding: 8px 12px;
+  border: 2px solid #ffb6d9;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+#saveNameBtn {
+  background-color: #ff9edb;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  margin-left: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#saveNameBtn:hover {
+  background-color: #ff7bb8;
+}
