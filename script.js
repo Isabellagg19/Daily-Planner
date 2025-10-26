@@ -5,9 +5,6 @@ const monthname = document.getElementById('month-name');
 const year = document.getElementById('year');
 const grid = document.getElementById('calendar-grid');
 const alarmSound = new Audio("sound.mp3");
-const journal = document.getElementById("journal");
-const saveJournal = document.getElementById("saveJournal");
-const entriesContainer = document.getElementById ("entriesContainer");
 
 const date= new Date();
 const currentMonth = date.getMonth();
@@ -113,14 +110,14 @@ function startTimer() {
     } else {
       clearInterval(timerInterval);
       isRunning = false;
+      alarmSound.play();
+      
       if (!onBreak) {
-        alarmSound.play();
         alert('Break timeee');
         onBreak = true;
         time = breakTime;
-        startTimer(); // Break starts
+        startTimer();
       } else {
-         alarmSound.play();
         alert('time to get back to work');
         onBreak = false;
         time = focusTime;
@@ -149,61 +146,88 @@ resetBtn.addEventListener('click', resetTimer);
 
 updateDisplay();
 
-journal.value = localStorage.getItem("journalText") || "";
+document.addEventListener('DOMContentLoaded', () => {
+  const journal = document.getElementById("journal");
+  const saveJournal = document.getElementById("saveJournal");
+  const clearJournal = document.getElementById("clearJournal");
+  const entriesContainer = document.getElementById("entriesContainer");
 
-saveJournal.addEventListener("click", () => {
-  localStorage.setItem("journalText", journal.value);
-  alert(" Your entry has been saved!");
-});
-
-function displayEntries() {
-  entriesContainer.innerHTML = "";
-  entries.forEach(entry => {
-    const entryDiv = document.createElement("div");
-    entryDiv.classList.add("entry");
-    entryDiv.innerHTML = `
-      <div class="entry-date">${entry.date}</div>
-      <div class="entry-text">${entry.text}</div>
-    `;
-    entriesContainer.appendChild(entryDiv);
-  });
-}
-
-let entries = JSON.parse(localStorage.getItem("journalEntries")) || [];
-function displayEntries() {
-  entriesContainer.innerHTML = "";
-  entries.forEach(entry => {
-    const entryDiv = document.createElement("div");
-    entryDiv.classList.add("entry");
-    entryDiv.innerHTML = `
-      <div class="entry-date">${entry.date}</div>
-      <div class="entry-text">${entry.text}</div>
-    `;
-    entriesContainer.appendChild(entryDiv);
-  });
-}
-
-displayEntries();
-
-saveJournal.addEventListener("click", () => {
-  const text = journal.value.trim();
-  if (text === "") {
-    alert("Please write something before saving 💕");
+  if (!journal || !saveJournal || !entriesContainer) {
+    console.error("Journal elements not found. Check HTML IDs: journal, saveJournal, entriesContainer");
     return;
   }
 
-  const date = new Date().toLocaleString("en-US", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
+  let entries = [];
+  try {
+    entries = JSON.parse(localStorage.getItem("journalEntries")) || [];
+  } catch (e) {
+    console.error("Error reading localStorage:", e);
+    entries = [];
+  }
+
+  function displayEntries() {
+    entriesContainer.innerHTML = "";
+    if (entries.length === 0) {
+      entriesContainer.innerHTML = `<div style="color:#888; font-size:13px; padding:8px;">No entries yet.</div>`;
+      return;
+    }
+    entries.forEach(entry => {
+      const entryDiv = document.createElement("div");
+      entryDiv.className = "entry";
+      entryDiv.innerHTML = `
+        <div class="entry-date">${entry.date}</div>
+        <div class="entry-text">${escapeHtml(entry.text)}</div>
+      `;
+      entriesContainer.appendChild(entryDiv);
+    });
+  }
+
+  function escapeHtml(unsafe) {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  saveJournal.addEventListener("click", () => {
+    const text = journal.value.trim();
+    if (text === "") {
+      alert("Please write something before saving");
+      return;
+    }
+
+    const date = new Date().toLocaleString("en-GB", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+
+    const newEntry = { text, date };
+    entries.unshift(newEntry); // The most recent one goes in the top
+
+    try {
+      localStorage.setItem("journalEntries", JSON.stringify(entries));
+      console.log("Saved entry:", newEntry);
+    } catch (e) {
+      console.error("Error saving to localStorage:", e);
+      alert("Could not save entry. Check browser settings.");
+      return;
+    }
+
+    journal.value = "";
+    displayEntries();
   });
 
-  const newEntry = { text, date };
-  entries.unshift(newEntry); 
-
-  localStorage.setItem("journalEntries", JSON.stringify(entries));
-  journal.value = "";
+  clearJournal.addEventListener("click", () => {
+    if (!confirm("Are you sure you want to delete all journal entries?")) return;
+    entries = [];
+    localStorage.removeItem("journalEntries");
+    displayEntries();
+  });
   displayEntries();
 });

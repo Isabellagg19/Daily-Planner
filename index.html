@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1 class= "main title"> Your Daily Planner</h1>
+        <h1 class= "main title"> My Daily Planner</h1>
         <div class="calendar">
         <div class="calendar-header">
          <span id="month-name"></span>
@@ -35,9 +35,12 @@
         </div>
         <div class= "journal-container">
             <h4>Daily Journal</h4>
-            <textarea id="journal" placeholder="Write your thoughts, goals, or wins here"></textarea>
-            <button id="SaveJournal">Save Entry</button>
-            <div id="entriesContainer"></div>
+            <textarea id="journal" placeholder="Here are my thoughts, goals and wins"></textarea>
+             <div class="journal-actions">
+            <button id="saveJournal">Save Entry</button>
+            <button id="clearJournal">Clear All</button>
+        </div>
+  <div id="entriesContainer"></div>
         </div>
 
         <script src="script.js"></script>
