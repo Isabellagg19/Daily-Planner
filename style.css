@@ -1,3 +1,8 @@
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 body{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-image: url('flower.png');
@@ -18,13 +23,14 @@ body{
   font-family: 'Dynalight', cursive;
   font-size: 90vw;                     
   text-align: center;
-  margin-bottom: 30px;          
+  margin-bottom: 30px;    
+  animation: fadeIn 1.2s ease-in-out;      
 }
 
 .planner-container {
   text-align: center;
   margin-top: 30px;
-  background-color: rgb(250, 173, 110);
+  background-color: rgb(250, 166, 110);
   padding: 20px;
   width: 300px;
   margin-left: auto;
@@ -56,7 +62,7 @@ h1 {
 }
 
 .task-input button {
-    background-color: rgb(248, 131, 131);
+    background-color: #fc5d5d;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -65,7 +71,7 @@ h1 {
 }
 
 .task-input button:hover {
-    background-color: #f0a754;
+    background-color: #f5818b;
 }
 
 #taskList {
@@ -137,7 +143,8 @@ button {
     margin: 5px;
     border-radius: 5px;
     cursor:pointer;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Lora", serif;
+    font-size: medium;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
@@ -145,8 +152,17 @@ button:hover {
     background-color: #f0a754;
 }
 
-.calendar {
+.right-column {
   position: absolute;
+  top: 50px;
+  right: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.calendar {
+  position: static;
   top: 40px;        
   right: 60px;    
   background-color: #fcbca2;
@@ -201,6 +217,40 @@ button:hover {
   border: 1px solid #fa5f86;
 }
 
+#quote-box {
+  position: static;
+  background-color: #f7bd8e;
+  border: 2px solid #ffbbb6;
+  border-radius: 20px;
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#quote {
+  font-size: 16px;
+  color: #000000;
+  font-family: "Libre Caslon Text", serif;
+  margin-bottom: 15px;
+}
+
+#new-quote-btn {
+  background-color: #fa5d48;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#new-quote-btn:hover {
+  background-color: #faa398;
+}
+
 .journal-container {
   position: fixed;
   top: 110px;
@@ -216,7 +266,7 @@ button:hover {
 
 .journal-container h4 {
   font-family:"Libre Caslon Text", serif;
-  color: #fc406f;
+  color: #fc405f;
   margin-bottom: 10px;
 }
 
@@ -240,13 +290,13 @@ button:hover {
   border-radius: 18px;
   border: none;
   cursor: pointer;
-  background: #f88765;
+  background: #fc5d5d;
   color: white;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 #saveJournal:hover {
-  background-color: #ffba9a;
+  background-color: #f8d086;
   transform: scale(1.05);
 }
 
@@ -266,18 +316,20 @@ button:hover {
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
-  font-style: italic;
+  font-style: normal;
 }
 
 .entry-date {
   font-size: 12px;
   color: #fc1038;
+  font-family: "Libre Caslon Text", serif;
 }
 
 .entry-text {
   margin-top: 5px;
   font-size: 14px;
-  color: #333;
+  color: #030303;
+  font-family: "Libre Caslon Text", serif;
 }
 
 #greeting-container {
@@ -286,9 +338,9 @@ button:hover {
 }
 
 #greeting {
-  font-size: 26px;
-  color: #ff7bb8;
-  font-family: "Poppins", sans-serif;
+  font-size: 35px;
+  color: #0f0707;
+  font-family: "Dancing Script", cursive;
   margin-bottom: 10px;
 }
 
@@ -301,7 +353,7 @@ button:hover {
 }
 
 #saveNameBtn {
-  background-color: #ff9edb;
+  background-color: #f79a65;
   color: white;
   border: none;
   padding: 8px 14px;
@@ -312,5 +364,18 @@ button:hover {
 }
 
 #saveNameBtn:hover {
-  background-color: #ff7bb8;
+  background-color: #fcc490;
+}
+
+.credit {
+  position: fixed;
+    bottom: 10px; 
+  right: 15px;
+  font-size: 18px;
+  color: #000000;
+  font-family: "Dancing Script", cursive;
+  background-color: rgba(252, 192, 136, 0.979);
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(255, 182, 193, 0.5);
 }

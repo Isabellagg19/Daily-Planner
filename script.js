@@ -270,3 +270,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   displayEntries();
 });
+
+const quotes= [
+  "“I never dreamed about success. I worked for it.” — Estée Lauder",
+  "“A girl should be two things: who and what she wants.” — Coco Chanel",
+  "“I’m tough, ambitious, and I know exactly what I want.” — Madonna",
+  "“You can be the lead in your own life.” — Kerry Washington",
+  "“Don’t just dream — do.” — Shonda Rhimes",
+  "“The most effective way to do it, is to do it.” — Amelia Earhart",
+  "“Be fearless in the pursuit of what sets your soul on fire.” — Jennifer Lee"
+];
+
+const quoteElement = document.getElementById("quote");
+const newQuoteBtn = document.getElementById("new-quote-btn");
+
+newQuoteBtn.addEventListener("click", () => {
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  quoteElement.textContent = quotes[randomIndex];
+});
