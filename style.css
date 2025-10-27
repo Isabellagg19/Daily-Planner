@@ -21,7 +21,7 @@ body{
 
 .main-title {
   font-family: 'Dynalight', cursive;
-  font-size: 90vw;                     
+  font-size: clamp(2rem, 5vw, 3.5rem);                    
   text-align: center;
   margin-bottom: 30px;    
   animation: fadeIn 1.2s ease-in-out;      
