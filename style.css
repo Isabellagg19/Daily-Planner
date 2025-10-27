@@ -22,7 +22,7 @@ body{
 
 .main-title {
   font-family: 'Dynalight', cursive;
-    padding-top: 90px;
+  margin-top: 80px; 
   font-size: 50px;                    
   text-align: center;    
   animation: fadeIn 1.2s ease-in-out;      
