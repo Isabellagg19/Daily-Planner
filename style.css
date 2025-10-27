@@ -10,6 +10,7 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    padding-top: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
